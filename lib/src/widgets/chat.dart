@@ -458,7 +458,7 @@ class _ChatState extends State<Chat> {
                                 child: LayoutBuilder(
                                   builder: (BuildContext context,
                                           BoxConstraints constraints) =>
-                                      CustomChatList(
+                                      ChatList(
                                     isLastPage: widget.isLastPage,
                                     itemBuilder: (item, index) =>
                                         _messageBuilder(item, constraints),
