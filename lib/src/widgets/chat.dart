@@ -428,44 +428,54 @@ class _ChatState extends State<Chat> {
             children: [
               Container(
                 color: widget.theme.backgroundColor,
-                child: Column(
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
                   children: [
-                    Flexible(
-                      child: widget.messages.isEmpty
-                          ? SizedBox.expand(
-                              child: _emptyStateBuilder(),
-                            )
-                          : GestureDetector(
-                              onTap: () {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                widget.onBackgroundTap?.call();
-                              },
-                              child: LayoutBuilder(
-                                builder: (BuildContext context,
-                                        BoxConstraints constraints) =>
-                                    ChatList(
-                                  isLastPage: widget.isLastPage,
-                                  itemBuilder: (item, index) =>
-                                      _messageBuilder(item, constraints),
-                                  items: _chatMessages,
-                                  onEndReached: widget.onEndReached,
-                                  onEndReachedThreshold:
-                                      widget.onEndReachedThreshold,
-                                  scrollPhysics: widget.scrollPhysics,
+                    Column(children: [
+                      Flexible(
+                        child: widget.messages.isEmpty
+                            ? SizedBox.expand(
+                                child: _emptyStateBuilder(),
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  widget.onBackgroundTap?.call();
+                                },
+                                child: LayoutBuilder(
+                                  builder: (BuildContext context,
+                                          BoxConstraints constraints) =>
+                                      ChatList(
+                                    isLastPage: widget.isLastPage,
+                                    itemBuilder: (item, index) =>
+                                        _messageBuilder(item, constraints),
+                                    items: _chatMessages,
+                                    onEndReached: widget.onEndReached,
+                                    onEndReachedThreshold:
+                                        widget.onEndReachedThreshold,
+                                    scrollPhysics: widget.scrollPhysics,
+                                  ),
                                 ),
                               ),
-                            ),
-                    ),
+                      )
+                    ]),
                     widget.customBottomWidget ??
-                        Input(
-                          isAttachmentUploading: widget.isAttachmentUploading,
-                          onAttachmentPressed: widget.onAttachmentPressed,
-                          onSendPressed: widget.onSendPressed,
-                          onTextChanged: widget.onTextChanged,
-                          onTextFieldTap: widget.onTextFieldTap,
-                          sendButtonVisibilityMode:
-                              widget.sendButtonVisibilityMode,
-                        ),
+                        ClipRRect(
+                            child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                                child: Container(
+                                    child: Input(
+                                  isAttachmentUploading:
+                                      widget.isAttachmentUploading,
+                                  onAttachmentPressed:
+                                      widget.onAttachmentPressed,
+                                  onSendPressed: widget.onSendPressed,
+                                  onTextChanged: widget.onTextChanged,
+                                  onTextFieldTap: widget.onTextFieldTap,
+                                  sendButtonVisibilityMode:
+                                      widget.sendButtonVisibilityMode,
+                                )))),
                   ],
                 ),
               ),
