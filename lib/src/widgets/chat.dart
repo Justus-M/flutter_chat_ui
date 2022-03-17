@@ -69,6 +69,7 @@ class Chat extends StatefulWidget {
     this.timeFormat,
     this.usePreviewData = true,
     required this.user,
+    this.chatListPadding?
   }) : super(key: key);
 
   /// See [Message.bubbleBuilder]
@@ -81,6 +82,8 @@ class Chat extends StatefulWidget {
   /// Allows you to replace the default Input widget e.g. if you want to create
   /// a channel view.
   final Widget? customBottomWidget;
+  
+  final EdgeInsets? chatListPadding;
 
   /// If [dateFormat], [dateLocale] and/or [timeFormat] is not enough to
   /// customize date headers in your case, use this to return an arbitrary
@@ -467,6 +470,7 @@ class _ChatState extends State<Chat> {
                                     onEndReachedThreshold:
                                         widget.onEndReachedThreshold,
                                     scrollPhysics: widget.scrollPhysics,
+                                    padding: widget.chatListPadding
                                   ),
                                 ),
                               ),
