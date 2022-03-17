@@ -15,8 +15,11 @@ class ChatList extends StatefulWidget {
     this.onEndReached,
     this.onEndReachedThreshold,
     this.scrollPhysics,
+    this.padding
   }) : super(key: key);
 
+  final EdgeInsets? padding;
+  
   /// Used for pagination (infinite scroll) together with [onEndReached].
   /// When true, indicates that there are no more pages to load and
   /// pagination will not be triggered.
@@ -219,7 +222,7 @@ class _ChatListState extends State<ChatList>
         reverse: true,
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.only(bottom: 150),
+            padding: widget.padding,
             sliver: SliverAnimatedList(
               initialItemCount: widget.items.length,
               key: _listKey,
