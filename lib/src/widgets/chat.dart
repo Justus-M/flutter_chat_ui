@@ -66,6 +66,7 @@ class Chat extends StatefulWidget {
     this.timeFormat,
     this.usePreviewData = true,
     required this.user,
+    this.chatListPadding
   }) : super(key: key);
 
   /// See [Message.bubbleBuilder]
@@ -75,6 +76,8 @@ class Chat extends StatefulWidget {
     required bool nextMessageInGroup,
   })? bubbleBuilder;
 
+   final EdgeInsets? chatListPadding;
+  
   /// Allows you to replace the default Input widget e.g. if you want to create
   /// a channel view.
   final Widget? customBottomWidget;
@@ -455,6 +458,7 @@ class _ChatState extends State<Chat> {
                                     onEndReachedThreshold:
                                         widget.onEndReachedThreshold,
                                     scrollPhysics: widget.scrollPhysics,
+                                    padding: widget.chatListPadding
                                   ),
                                 ),
                               ),
